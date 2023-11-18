@@ -7,10 +7,15 @@ const videoUrl = process.argv[2];
 const startTime = process.argv[3];
 const endTime = process.argv[4];
 const fileName = `${process.argv[5]}.mp3` || 'output.mp3';
+const folder = 'save';
 
 if (!videoUrl || !startTime || !endTime) {
   console.log('Usage: node index.js <youtube_link> <start_time> <end_time> [output_file_name]');
   process.exit(1);
+}
+
+if (!fs.existsSync(folder)) {
+  fs.mkdirSync(folder);
 }
 
 const videoStream = ytdl(videoUrl, { filter: 'audioonly' });
@@ -33,4 +38,4 @@ ffmpeg()
   .on('error', (err) => {
     console.error('Error:', err);
   })
-  .save(fileName);
+  .save(`${folder}/${fileName}`);
