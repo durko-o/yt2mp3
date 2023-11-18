@@ -6,7 +6,7 @@ const moment = require('moment');
 const videoUrl = process.argv[2];
 const startTime = process.argv[3];
 const endTime = process.argv[4];
-const fileName = process.argv[5] || 'output.mp3';
+const fileName = `${process.argv[5]}.mp3` || 'output.mp3';
 
 if (!videoUrl || !startTime || !endTime) {
   console.log('Usage: node index.js <youtube_link> <start_time> <end_time> [output_file_name]');
